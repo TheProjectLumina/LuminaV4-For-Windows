@@ -38,6 +38,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(files("libs/MuCuteRelay.jar"))
 
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -45,6 +46,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+
         }
     }
 }

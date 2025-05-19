@@ -12,6 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.projectlumina.luna.component.AuthBrowserLogin
+import com.projectlumina.luna.service.Service
+
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import luna.composeapp.generated.resources.Res
@@ -28,16 +31,24 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+            Button(onClick = { Service.toggle()}) {
+                Text("start relay")
             }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+
         }
+
+
+
     }
+}
+
+@Composable
+fun AuthScreen() {
+    var result by remember { mutableStateOf<String>("Waiting...") }
+
+    AuthBrowserLogin { error ->
+        result = error?.localizedMessage ?: "Success!"
+    }
+
+    Text(result)
 }

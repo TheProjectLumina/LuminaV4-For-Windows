@@ -9,5 +9,6 @@ fun main() = application {
         title = "Luna",
     ) {
         App()
+        AuthScreen()
     }
 }
